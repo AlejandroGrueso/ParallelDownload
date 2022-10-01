@@ -68,6 +68,15 @@ int main(int argc, char* argv[]) {
          *   - Call download_fragment(TARGET_URL, from, to, outfile); 
          *   - exit(0);
          */
+        pid = fork();
+        int status;
+        if (pid == 0)
+        {
+
+            char outfile[12];
+            sprintf(outfile, "%s-%d", CHUNK_FILENAME_PREFIX, i);
+            download_fragment(TARGET_URL, from, to, outfile);
+            exit(0);
 
 
         if (download_mode == 'S') {
@@ -76,6 +85,10 @@ int main(int argc, char* argv[]) {
              * downloading the current chunk if the download mode is S
              * (sequential)
              */
+             if (pid != 0)
+            {
+                wait(&status);
+            }
         }
     }
 
