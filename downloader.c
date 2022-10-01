@@ -97,6 +97,12 @@ int main(int argc, char* argv[]) {
          * TODO: wait until all the downloads have finished if the download mode
          * is P (parallel)
          */
+          int status;
+    if (pid != 0)
+    {
+
+        while (wait(&status) > 0)
+        {
     }
     printf ("-- End downloader --\n");
 }
